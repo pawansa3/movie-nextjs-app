@@ -40,7 +40,9 @@ const Searchbar = () => {
             placeholder="Search movie by title"
             {...formik.getFieldProps("search")}
           />
-          <InputLeftElement children={<SearchIcon color="gray.300" />} />
+          <InputLeftElement>
+            <SearchIcon color="gray.300" />
+          </InputLeftElement>
         </InputGroup>
         {formik.errors.search && (
           <FormErrorMessage>{formik.errors.search}</FormErrorMessage>
