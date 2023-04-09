@@ -1,7 +1,7 @@
 import { AppDispatch, RootState } from "@/store";
 import { fetchMovies } from "@/store/actions/movieAction";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {
@@ -10,10 +10,13 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftElement,
+  CircularProgress,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const Searchbar = () => {
+  const { loading } = useSelector<RootState, any>((state) => state.movie);
   const dispatch = useDispatch<AppDispatch>();
 
   const formik = useFormik({
@@ -39,6 +42,7 @@ const Searchbar = () => {
             variant="outline"
             placeholder="Search movie by title"
             {...formik.getFieldProps("search")}
+            isDisabled={loading}
           />
           <InputLeftElement>
             <SearchIcon color="gray.300" />

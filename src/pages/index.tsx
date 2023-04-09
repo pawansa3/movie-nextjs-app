@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { Inter } from "next/font/google";
-import { Alert, AlertIcon, Box, Center } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Center,
+  CircularProgress,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import {
@@ -16,9 +22,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
-  const { lists: movies, error } = useSelector<RootState, any>(
-    (state) => state.movie
-  );
+  const {
+    lists: movies,
+    error,
+    loading,
+  } = useSelector<RootState, any>((state) => state.movie);
 
   useEffect(() => {
     setTimeout(() => dispatch(clearError()), 5000);
@@ -43,6 +51,12 @@ export default function Home() {
               <AlertIcon />
               {error}
             </Alert>
+          </Center>
+        )}
+
+        {loading && (
+          <Center>
+            <CircularProgress isIndeterminate />
           </Center>
         )}
 
