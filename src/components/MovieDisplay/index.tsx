@@ -7,14 +7,14 @@ const MovieDisplay = (props: any) => {
 
   return (
     <Grid
-      templateColumns="repeat(6, minmax(160px, 200px))"
+      templateColumns="repeat(auto-fill, minmax(160px, 1fr))"
       p={3}
       gap={4}
-      justifyContent="space-between"
+      justifyContent="start"
     >
       {movies.length > 0 &&
         movies.map((movie: any) => (
-          <GridItem key={movie.imdbID} h="300px" w="100%">
+          <GridItem key={movie.imdbID} colSpan={1}>
             <MovieCard
               isBookmarked={movie.isBookmarked}
               isWatched={movie.isWatched}
